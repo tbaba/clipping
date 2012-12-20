@@ -1,5 +1,17 @@
 %h1 Listing webpages
 
+= form_for @webpage do |f|
+  %dl
+    %dt= f.label :title
+    %dd= f.text_field :title
+    %dt= f.label :url
+    %dd= f.url_field :url
+    %dt= f.label :description
+    %dd= f.text_area :description
+
+  %nav
+    %p= f.submit 'Register'
+
 %table
   %tr
     %th Title

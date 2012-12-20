@@ -2,6 +2,7 @@
 class WebpagesController < ApplicationController
   def index
     @webpages = Webpage.all
+    @webpage = Webpage.new
   end
 
   def show id
