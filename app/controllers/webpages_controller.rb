@@ -1,83 +1,44 @@
+# coding: utf-8
 class WebpagesController < ApplicationController
-  # GET /webpages
-  # GET /webpages.json
   def index
     @webpages = Webpage.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @webpages }
-    end
   end
 
-  # GET /webpages/1
-  # GET /webpages/1.json
-  def show
-    @webpage = Webpage.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @webpage }
-    end
+  def show id
+    @webpage = Webpage.find id
   end
 
-  # GET /webpages/new
-  # GET /webpages/new.json
   def new
     @webpage = Webpage.new
+  end
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @webpage }
+  def edit id
+    @webpage = Webpage.find id
+  end
+
+  def create webpage
+    @webpage = Webpage.new webpage
+
+    if @webpage.save
+      redirect_to @webpage, notice: 'Webpage was successfully created.'
+    else
+      render action: "new"
     end
   end
 
-  # GET /webpages/1/edit
-  def edit
-    @webpage = Webpage.find(params[:id])
-  end
+  def update id, webpage
+    @webpage = Webpage.find id
 
-  # POST /webpages
-  # POST /webpages.json
-  def create
-    @webpage = Webpage.new(params[:webpage])
-
-    respond_to do |format|
-      if @webpage.save
-        format.html { redirect_to @webpage, notice: 'Webpage was successfully created.' }
-        format.json { render json: @webpage, status: :created, location: @webpage }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @webpage.errors, status: :unprocessable_entity }
-      end
+    if @webpage.update_attributes webpage
+      redirect_to @webpage, notice: 'Webpage was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
-  # PUT /webpages/1
-  # PUT /webpages/1.json
-  def update
-    @webpage = Webpage.find(params[:id])
-
-    respond_to do |format|
-      if @webpage.update_attributes(params[:webpage])
-        format.html { redirect_to @webpage, notice: 'Webpage was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @webpage.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /webpages/1
-  # DELETE /webpages/1.json
-  def destroy
-    @webpage = Webpage.find(params[:id])
+  def destroy id
+    @webpage = Webpage.find id
     @webpage.destroy
-
-    respond_to do |format|
-      format.html { redirect_to webpages_url }
-      format.json { head :no_content }
-    end
+    redirect_to webpages_url
   end
 end
