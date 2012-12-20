@@ -1,0 +1,23 @@
+%h1 Listing webpages
+
+%table
+  %tr
+    %th Title
+    %th Url
+    %th Description
+    %th
+    %th
+    %th
+
+  - @webpages.each do |webpage|
+    %tr
+      %td= webpage.title
+      %td= webpage.url
+      %td= webpage.description
+      %td= link_to 'Show', webpage
+      %td= link_to 'Edit', edit_webpage_path(webpage)
+      %td= link_to 'Destroy', webpage, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Webpage', new_webpage_path

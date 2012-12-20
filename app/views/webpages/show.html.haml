@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @webpage.title
+%p
+  %b Url:
+  = @webpage.url
+%p
+  %b Description:
+  = @webpage.description
+
+= link_to 'Edit', edit_webpage_path(@webpage)
+\|
+= link_to 'Back', webpages_path
