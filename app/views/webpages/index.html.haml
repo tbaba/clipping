@@ -1,4 +1,4 @@
-%h1 Listing webpages
+%h2 Listing webpages
 
 = form_for @webpage do |f|
   %dl
@@ -12,23 +12,18 @@
   %nav
     %p= f.submit 'Register'
 
-%table
-  %tr
-    %th Title
-    %th Url
-    %th Description
-    %th
-    %th
-    %th
+- @webpages.each do |webpage|
+  %article
+    %h3= webpage.title
+    %p= link_to webpage.url, webpage.url
+    = simple_format webpage.description
 
-  - @webpages.each do |webpage|
-    %tr
-      %td= webpage.title
-      %td= webpage.url
-      %td= webpage.description
-      %td= link_to 'Show', webpage
-      %td= link_to 'Edit', edit_webpage_path(webpage)
-      %td= link_to 'Destroy', webpage, method: :delete, data: { confirm: 'Are you sure?' }
+    %aside
+      = link_to 'Show', webpage
+      |
+      = link_to 'Edit', edit_webpage_path(webpage)
+      |
+      = link_to 'Destroy', webpage, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 

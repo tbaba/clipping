@@ -7,4 +7,11 @@
     = csrf_meta_tags
 
   %body
-    = yield
+    #header
+      .body
+        %h1 Clipping
+    #content
+      .body= yield
+    #footer
+      .body
+        hogehoge
